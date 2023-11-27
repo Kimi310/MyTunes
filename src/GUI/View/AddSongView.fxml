@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="202.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.AddSongView">
+   <children>
+      <VBox alignment="TOP_RIGHT" layoutY="-1.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="54.0" text="Title:">
+               <VBox.margin>
+                  <Insets right="5.0" top="17.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="43.0" text="Artist:">
+               <VBox.margin>
+                  <Insets left="30.0" top="17.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="77.0" text="Category:">
+               <VBox.margin>
+                  <Insets left="30.0" top="17.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="77.0" text="Time:">
+               <VBox.margin>
+                  <Insets left="30.0" top="17.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="77.0" text="File:">
+               <VBox.margin>
+                  <Insets left="30.0" top="17.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="120.0" layoutY="3.0" prefHeight="200.0" prefWidth="208.0">
+         <children>
+            <TextField fx:id="titletxt">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="artisttxt" prefHeight="25.0" prefWidth="208.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <ComboBox prefWidth="150.0">
+               <VBox.margin>
+                  <Insets top="17.0" />
+               </VBox.margin>
+            </ComboBox>
+            <TextField fx:id="timetxt">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="filetxt">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
