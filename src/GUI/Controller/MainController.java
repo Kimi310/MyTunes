@@ -64,6 +64,8 @@ public class MainController implements Initializable {
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddSongView.fxml"));
         Parent root = loader.load();
+        AddSongViewController addSong = loader.getController();
+        addSong.setParentController(this);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
