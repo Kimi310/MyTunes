@@ -5,12 +5,22 @@ public class Song {
     private String artist;
     private String category;
     private String time;
+    private String file;
 
-    public Song(String title, String artist, String category, String time) {
+    public Song(String title, String artist, String category, String time,String file) {
         this.title = title;
         this.artist = artist;
         this.category = category;
         this.time = time;
+        this.file = file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public String getFile() {
+        return file;
     }
 
     public String getTitle() {

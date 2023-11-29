@@ -1,5 +1,7 @@
 package GUI.Controller;
 
+import BE.Song;
+import BLL.AddingSongHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,32 +21,22 @@ public class AddSongViewController {
     private TextField timetxt;
     @FXML
     private TextField filetxt;
+    private AddingSongHandler handler = new AddingSongHandler();
+
+    private MainController controller = new MainController();
 
     public void addSongToList(ActionEvent actionEvent) {
-        if (checkNewSong(textFieldsToString())){
+        if (handler.checkNewSong(handler.textFieldsToString(titletxt,artisttxt,categorytxt,timetxt,filetxt))){
+            Song song = new Song(titletxt.getText(),artisttxt.getText(),categorytxt.getText(),timetxt.getText(),filetxt.getText());
+            controller.addSongToTable(song);
             Stage stage = (Stage) filetxt.getScene().getWindow();
             stage.close();
         }else{
             errorlbl.setVisible(true);
         }
-
     }
 
-    private String[] textFieldsToString () {
-        String[] s = new String[5];
-        s[0] = titletxt.getText();
-        s[1] = artisttxt.getText();
-        s[2] = categorytxt.getText();
-        s[3] = timetxt.getText();
-        s[4] = filetxt.getText();
-        return s;
-    }
-
-    static boolean checkNewSong (String[] s){
-        if (s[0].isEmpty() || s[1].isEmpty() || s[2].isEmpty() || s[3].isEmpty() || s[4].isEmpty()){
-            return false;
-        }else {
-            return true;
-        }
+    public void setParentController (MainController controller){
+        this.controller = controller;
     }
 }
