@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import javafx.stage.FileChooser.ExtensionFilter;
 import java.io.File;
 
 public class AddSongViewController {
@@ -48,6 +48,8 @@ public class AddSongViewController {
     public void chooseFile(ActionEvent actionEvent) {
         FileChooser chooser = new FileChooser();
         Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        chooser.getExtensionFilters().add(new ExtensionFilter("MUSIC FILES","*.mp3"));
+        chooser.getExtensionFilters().add(new ExtensionFilter("MUSIC FILES","*.wav"));
         File file = chooser.showOpenDialog(stage);
         if (file != null){
             filetxt.setText(file.getAbsolutePath());

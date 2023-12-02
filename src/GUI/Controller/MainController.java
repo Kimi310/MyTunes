@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.Song;
+import BLL.FilterHandler;
 import BLL.MusicPlayer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    @FXML
+    private TextField filtertxt;
     @FXML
     private TableColumn<Song,String> titleColumn;
     @FXML
@@ -92,5 +95,17 @@ public class MainController implements Initializable {
         nextbtn.setGraphic(new ImageView("Images/next.png"));
         prevbtn.setGraphic(new ImageView("Images/prev.png"));
         playbtn.setGraphic(new ImageView("Images/play.png"));
+    }
+
+    public void filterTableHandler(ActionEvent actionEvent) {
+        if (!filtertxt.getText().isEmpty()){
+            songtable.setItems(new FilterHandler().filter(data,filtertxt));
+        }else {
+            songtable.setItems(data);
+        }
+    }
+
+    public void resetFilter(ActionEvent actionEvent) {
+        songtable.setItems(data);
     }
 }

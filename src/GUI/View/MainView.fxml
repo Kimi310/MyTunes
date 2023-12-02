@@ -7,17 +7,18 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="461.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainController">
+<AnchorPane prefHeight="462.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainController">
    <children>
-      <Slider layoutX="533.0" layoutY="30.0" prefHeight="14.0" prefWidth="118.0" />
-      <Button fx:id="playbtn" alignment="CENTER" layoutX="421.0" layoutY="13.0" mnemonicParsing="false" onAction="#playPauseMusicHandler" prefHeight="45.0" prefWidth="43.0" />
-      <Button fx:id="nextbtn" alignment="CENTER" layoutX="470.0" layoutY="20.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
-      <Button fx:id="prevbtn" alignment="CENTER" layoutX="372.0" layoutY="20.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
-      <ProgressBar layoutX="152.0" layoutY="36.0" prefWidth="200.0" progress="0.0" />
+      <Slider layoutX="613.0" layoutY="30.0" prefHeight="14.0" prefWidth="118.0" />
+      <Button fx:id="playbtn" alignment="CENTER" layoutX="468.0" layoutY="15.0" mnemonicParsing="false" onAction="#playPauseMusicHandler" prefHeight="45.0" prefWidth="43.0" />
+      <Button fx:id="nextbtn" alignment="CENTER" layoutX="517.0" layoutY="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
+      <Button fx:id="prevbtn" alignment="CENTER" layoutX="419.0" layoutY="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
+      <ProgressBar layoutX="174.0" layoutY="33.0" prefWidth="200.0" progress="0.0" />
       <VBox layoutX="14.0" layoutY="68.0" prefHeight="394.0" prefWidth="127.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="Songs">
@@ -27,31 +28,45 @@
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="Playlists" />
          </children>
       </VBox>
-      <HBox alignment="CENTER_LEFT" layoutX="152.0" layoutY="414.0" prefHeight="34.0" prefWidth="462.0">
+      <HBox alignment="CENTER_LEFT" layoutX="152.0" layoutY="414.0" prefHeight="26.0" prefWidth="607.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#addSong" prefHeight="26.0" prefWidth="108.0" text="add">
+            <Button mnemonicParsing="false" onAction="#addSong" prefHeight="26.0" prefWidth="80.0" text="add">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="edit">
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="edit">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="delete" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="delete" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="347.0">
+               <children>
+                  <TextField fx:id="filtertxt" prefHeight="25.0" prefWidth="118.0" promptText="Filter...">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#filterTableHandler" text="Filter">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Button>
+                  <Button mnemonicParsing="false" onAction="#resetFilter" text="Reset" />
+               </children>
+            </HBox>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </HBox>
-      <Label fx:id="playinglbl" alignment="CENTER" layoutX="165.0" layoutY="12.0" prefHeight="17.0" prefWidth="174.0" text="Nothing is playing" />
-      <TableView fx:id="songtable" layoutX="152.0" layoutY="68.0" prefHeight="327.0" prefWidth="508.0">
+      <Label fx:id="playinglbl" alignment="CENTER" layoutX="187.0" layoutY="9.0" prefHeight="17.0" prefWidth="174.0" text="Nothing is playing" />
+      <TableView fx:id="songtable" layoutX="152.0" layoutY="68.0" prefHeight="327.0" prefWidth="607.0">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="171.0" text="Title" />
-          <TableColumn fx:id="artistColumn" prefWidth="166.0" text="Artist" />
-            <TableColumn fx:id="categoryColumn" minWidth="0.0" prefWidth="95.0" text="Category" />
-            <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
+          <TableColumn fx:id="titleColumn" prefWidth="199.0" text="Title" />
+          <TableColumn fx:id="artistColumn" prefWidth="164.0" text="Artist" />
+            <TableColumn fx:id="categoryColumn" minWidth="0.0" prefWidth="116.0" text="Category" />
+            <TableColumn fx:id="timeColumn" prefWidth="127.0" text="Time" />
         </columns>
       </TableView>
    </children>
