@@ -13,11 +13,20 @@ public class MusicPlayer {
     Media sound;
     private MediaPlayer player;
     public void playNewSong(String file, Button playButton){
-        playButton.setGraphic(new ImageView("Images/pause.png"));
-        sound = new Media(new File(file).toURI().toString());
-        player = new MediaPlayer(sound);
-        player.play();
-        playing=true;
+        if (!playing){
+            playButton.setGraphic(new ImageView("Images/pause.png"));
+            sound = new Media(new File(file).toURI().toString());
+            player = new MediaPlayer(sound);
+            player.play();
+            playing=true;
+        }else {
+            player.stop();
+            playButton.setGraphic(new ImageView("Images/pause.png"));
+            sound = new Media(new File(file).toURI().toString());
+            player = new MediaPlayer(sound);
+            player.play();
+            playing=true;
+        }
     }
     public void playPause (Button playButton){
         if (sound==null){
