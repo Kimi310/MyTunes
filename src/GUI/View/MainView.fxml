@@ -14,7 +14,7 @@
 <AnchorPane prefHeight="461.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainController">
    <children>
       <Slider layoutX="533.0" layoutY="30.0" prefHeight="14.0" prefWidth="118.0" />
-      <Button fx:id="playbtn" alignment="CENTER" layoutX="421.0" layoutY="13.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="43.0" />
+      <Button fx:id="playbtn" alignment="CENTER" layoutX="421.0" layoutY="13.0" mnemonicParsing="false" onAction="#playPauseMusicHandler" prefHeight="45.0" prefWidth="43.0" />
       <Button fx:id="nextbtn" alignment="CENTER" layoutX="470.0" layoutY="20.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
       <Button fx:id="prevbtn" alignment="CENTER" layoutX="372.0" layoutY="20.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
       <ProgressBar layoutX="152.0" layoutY="36.0" prefWidth="200.0" progress="0.0" />
@@ -29,7 +29,7 @@
       </VBox>
       <HBox alignment="CENTER_LEFT" layoutX="152.0" layoutY="414.0" prefHeight="34.0" prefWidth="462.0">
          <children>
-            <Button fx:id="addbtn" mnemonicParsing="false" onAction="#addSong" prefHeight="26.0" prefWidth="108.0" text="add">
+            <Button mnemonicParsing="false" onAction="#addSong" prefHeight="26.0" prefWidth="108.0" text="add">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>

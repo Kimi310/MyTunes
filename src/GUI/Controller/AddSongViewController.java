@@ -4,9 +4,14 @@ import BE.Song;
 import BLL.AddingSongHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class AddSongViewController {
     @FXML
@@ -38,5 +43,17 @@ public class AddSongViewController {
 
     public void setParentController (MainController controller){
         this.controller = controller;
+    }
+
+    public void chooseFile(ActionEvent actionEvent) {
+        FileChooser chooser = new FileChooser();
+        Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        File file = chooser.showOpenDialog(stage);
+        if (file != null){
+            filetxt.setText(file.getAbsolutePath());
+            Media sound = new Media(file.toURI().toString());
+            timetxt.setText(String.valueOf(sound.getDuration()));
+            titletxt.setText(file.getName());
+        }
     }
 }
