@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.stage.FileChooser;
@@ -54,8 +55,10 @@ public class AddSongViewController {
         if (file != null){
             filetxt.setText(file.getAbsolutePath());
             Media sound = new Media(file.toURI().toString());
-            timetxt.setText(String.valueOf(sound.getDuration()));
+            System.out.println(sound.getDuration().toSeconds());
+            timetxt.setText(String.valueOf(sound.getDuration().toSeconds()));
             titletxt.setText(file.getName());
         }
     }
+
 }

@@ -3,7 +3,10 @@ package GUI.Controller;
 import BE.Song;
 import BLL.FilterHandler;
 import BLL.MusicPlayer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +17,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 public class MainController implements Initializable {
+    @FXML
+    private Slider volumeSlider;
+    @FXML
+    private Slider progressslider;
     @FXML
     private TextField filtertxt;
     @FXML
@@ -50,6 +60,21 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setImages();
         setTablePropertiesOnInit();
+        setVolumeListener();
+        //setProgressListener();
+        setDataListener();
+        progressslider.disableProperty().set(true);
+    }
+
+    private void setDataListener() {
+        data.addListener(new ListChangeListener<Song>() {
+            @Override
+            public void onChanged(Change<? extends Song> c) {
+                if (data.isEmpty()){
+                    progressslider.disableProperty().set(true);
+                }
+            }
+        });
     }
 
     @FXML
@@ -85,6 +110,9 @@ public class MainController implements Initializable {
                 if (event.getClickCount()==2 && !row.isEmpty()){
                     Song rowSong = row.getItem();
                     player.playNewSong(rowSong.getFile(),playbtn);
+                    player.beginTimer(progressslider);
+                    progressslider.disableProperty().set(false);
+                    progressslider.setMax(player.getSound().getDuration().toSeconds());
                 }
             });
             return row;
@@ -106,6 +134,30 @@ public class MainController implements Initializable {
     }
 
     public void resetFilter(ActionEvent actionEvent) {
+        filtertxt.setText("");
         songtable.setItems(data);
     }
+
+    public void setVolumeListener(){
+         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+             @Override
+             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                 MediaPlayer mediaPlayer = player.getPlayer();
+                 mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
+             }
+         });
+    }
+/*
+    public void setProgressListener() {
+        progressslider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                MediaPlayer mediaPlayer = player.getPlayer();
+                mediaPlayer.seek(Duration.seconds(progressslider.getValue()));
+                player.beginTimer(progressslider);
+            }
+        });
+    }
+
+ */
 }
