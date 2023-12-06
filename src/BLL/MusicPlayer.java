@@ -1,5 +1,6 @@
 package BLL;
 
+import BE.Song;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
@@ -81,7 +82,8 @@ public class MusicPlayer {
     public void cancelTimer(){
         timer.cancel();
     }
-    public void playNextSongHandler(){
 
+    public String getCurrentSongURI(){
+        return sound.getSource();
     }
 }

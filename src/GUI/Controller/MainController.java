@@ -21,8 +21,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -60,7 +62,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setImages();
+        setButtons();
         setTablePropertiesOnInit();
         setVolumeListener();
         setProgressOnMouse();
@@ -68,12 +70,19 @@ public class MainController implements Initializable {
         progressslider.disableProperty().set(true);
     }
 
-    private void setDataListener() { // if the data table is empty the progressslider will be disabled
+    private void setDataListener() {
         data.addListener(new ListChangeListener<Song>() {
             @Override
             public void onChanged(Change<? extends Song> c) {
                 if (data.isEmpty()){
                     progressslider.disableProperty().set(true);
+                    playbtn.setDisable(true);
+                    nextbtn.setDisable(true);
+                    prevbtn.setDisable(true);
+                }else {
+                    playbtn.setDisable(false);
+                    nextbtn.setDisable(false);
+                    prevbtn.setDisable(false);
                 }
             }
         });
@@ -118,10 +127,15 @@ public class MainController implements Initializable {
         });
     }
 
-    private void setImages(){ // sets images to button
+    private void setButtons(){ // sets images to button
         nextbtn.setGraphic(new ImageView("Images/next.png"));
         prevbtn.setGraphic(new ImageView("Images/prev.png"));
         playbtn.setGraphic(new ImageView("Images/play.png"));
+        if (data.isEmpty()){
+            playbtn.setDisable(true);
+            nextbtn.setDisable(true);
+            prevbtn.setDisable(true);
+        }
     }
 
     public void filterTableHandler(ActionEvent actionEvent) {
@@ -212,5 +226,24 @@ public class MainController implements Initializable {
     }
 
     public void deleteSongHandler(ActionEvent actionEvent) {
+        selectedSong = songtable.getSelectionModel().getSelectedItem();
+        if (selectedSong!=null && !data.isEmpty()){
+            if (Objects.equals(new File(selectedSong.getFile()).toURI().toString(), player.getCurrentSongURI())){
+                data.remove(selectedSong);
+                if (data.isEmpty()){
+                    playinglbl.setText("Nothing is playing");
+                    player.playPause(playbtn);
+                }else {
+                    if (currentSongIndex != data.size()-1){
+                        Song nextSong = data.get(currentSongIndex+1);
+                        beginSongHandler(nextSong);
+                    }else {
+                        Song nextSong = data.get(0);
+                        beginSongHandler(nextSong);
+                    }
+                }
+            }
+
+        }
     }
 }
