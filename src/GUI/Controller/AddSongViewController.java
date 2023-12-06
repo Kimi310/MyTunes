@@ -27,21 +27,38 @@ public class AddSongViewController {
     private TextField timetxt;
     @FXML
     private TextField filetxt;
+    private boolean editing = false;
+    private Song editedSong;
     private AddingSongHandler handler = new AddingSongHandler();
+    private int selectedSongIndex;
 
     private MainController controller = new MainController();
 
     public void addSongToList(ActionEvent actionEvent) {
         if (handler.checkNewSong(handler.textFieldsToString(titletxt,artisttxt,categorytxt,timetxt,filetxt))){
-            Song song = new Song(titletxt.getText(),artisttxt.getText(),categorytxt.getText(),timetxt.getText(),filetxt.getText());
-            controller.addSongToTable(song);
+            if (editing==false){
+                Song song = new Song(titletxt.getText(),artisttxt.getText(),categorytxt.getText(),timetxt.getText(),filetxt.getText());
+                controller.addSongToTable(song);
+            }else {
+                Song song = new Song(titletxt.getText(),artisttxt.getText(),categorytxt.getText(),timetxt.getText(),filetxt.getText());
+                controller.changeSongOnIndex(selectedSongIndex,song);
+            }
             Stage stage = (Stage) filetxt.getScene().getWindow();
             stage.close();
         }else{
             errorlbl.setVisible(true);
         }
     }
-
+    public void editInit(Song s, int selectedSongIndex){
+        this.selectedSongIndex = selectedSongIndex;
+        editing = true;
+        editedSong = s;
+        categorytxt.setText(s.getCategory());
+        titletxt.setText(s.getTitle());
+        timetxt.setText(s.getTime());
+        artisttxt.setText(s.getArtist());
+        filetxt.setText(s.getFile());
+    }
     public void setParentController (MainController controller){
         this.controller = controller;
     }

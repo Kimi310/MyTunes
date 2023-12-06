@@ -33,12 +33,12 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="edit">
+            <Button mnemonicParsing="false" onAction="#editSongHandler" prefHeight="26.0" prefWidth="80.0" text="edit">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="delete" />
+            <Button mnemonicParsing="false" onAction="#deleteSongHandler" prefHeight="26.0" prefWidth="80.0" text="delete" />
             <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="347.0">
                <children>
                   <TextField fx:id="filtertxt" prefHeight="25.0" prefWidth="118.0" promptText="Filter...">

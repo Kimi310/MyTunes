@@ -54,6 +54,8 @@ public class MainController implements Initializable {
     private int currentSongIndex;
     private MusicPlayer player = new MusicPlayer();
     private final ObservableList<Song> data = FXCollections.observableArrayList();
+    private Song selectedSong;
+    private int selectedSongIndex;
 
 
     @Override
@@ -172,7 +174,7 @@ public class MainController implements Initializable {
         }
     }
 
-    public void beginSongHandler(Song rowSong){
+    public void beginSongHandler(Song rowSong){ // initializes new song to be played
         for (int i=0;i<data.size();i++) {
             if (data.get(i) == rowSong){
                 currentSongIndex = i;
@@ -183,5 +185,32 @@ public class MainController implements Initializable {
         player.beginTimer(progressslider);
         progressslider.disableProperty().set(false);
         playinglbl.setText(rowSong.getTitle());
+    }
+
+    public void editSongHandler(ActionEvent actionEvent) throws IOException {
+        selectedSong = songtable.getSelectionModel().getSelectedItem();
+        if (selectedSong!=null && !data.isEmpty()){
+            for (int i=0;i<data.size();i++) {
+                if (data.get(i) == selectedSong){
+                    selectedSongIndex = i;
+                    break;
+                }
+            }
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AddSongView.fxml"));
+            Parent root = loader.load();
+            AddSongViewController addSong = loader.getController();
+            addSong.setParentController(this);
+            addSong.editInit(selectedSong,selectedSongIndex);
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        }
+    }
+
+    public void changeSongOnIndex(int i, Song s){
+        data.set(i,s);
+    }
+
+    public void deleteSongHandler(ActionEvent actionEvent) {
     }
 }
