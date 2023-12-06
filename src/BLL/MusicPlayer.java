@@ -71,6 +71,7 @@ public class MusicPlayer {
                     progressSlider.setMax(end);
                     progressSlider.setValue(current);
                     if (current/end == 1){
+                        progressSlider.disableProperty().set(true);
                         cancelTimer();
                     }
             }

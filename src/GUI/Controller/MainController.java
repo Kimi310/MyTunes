@@ -61,7 +61,7 @@ public class MainController implements Initializable {
         setImages();
         setTablePropertiesOnInit();
         setVolumeListener();
-        //setProgressListener();
+        setProgressOnMouse();
         setDataListener();
         progressslider.disableProperty().set(true);
     }
@@ -147,17 +147,10 @@ public class MainController implements Initializable {
              }
          });
     }
-/*
-    public void setProgressListener() {
-        progressslider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                MediaPlayer mediaPlayer = player.getPlayer();
-                mediaPlayer.seek(Duration.seconds(progressslider.getValue()));
-                player.beginTimer(progressslider);
-            }
+    public void setProgressOnMouse() {
+        progressslider.setOnMouseClicked(event -> {
+            MediaPlayer mediaPlayer = player.getPlayer();
+            mediaPlayer.seek(Duration.seconds(progressslider.getValue()));
         });
     }
-
- */
 }
