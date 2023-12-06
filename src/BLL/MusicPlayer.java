@@ -19,7 +19,7 @@ public class MusicPlayer {
     private Timer timer;
     private TimerTask timerTask;
 
-    public void playNewSong(String file, Button playButton){
+    public void playNewSong(String file, Button playButton){ // plays new song from the list
         if (!playing){
             playButton.setGraphic(new ImageView("Images/pause.png"));
             sound = new Media(new File(file).toURI().toString());
@@ -81,8 +81,7 @@ public class MusicPlayer {
     public void cancelTimer(){
         timer.cancel();
     }
+    public void playNextSongHandler(){
 
-    public Media getSound() {
-        return sound;
     }
 }

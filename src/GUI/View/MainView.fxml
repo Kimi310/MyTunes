@@ -15,8 +15,8 @@
    <children>
       <Slider fx:id="volumeSlider" layoutX="613.0" layoutY="30.0" max="200.0" prefHeight="14.0" prefWidth="118.0" value="100.0" />
       <Button fx:id="playbtn" alignment="CENTER" layoutX="468.0" layoutY="15.0" mnemonicParsing="false" onAction="#playPauseMusicHandler" prefHeight="45.0" prefWidth="43.0" />
-      <Button fx:id="nextbtn" alignment="CENTER" layoutX="517.0" layoutY="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
-      <Button fx:id="prevbtn" alignment="CENTER" layoutX="419.0" layoutY="22.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="43.0" />
+      <Button fx:id="nextbtn" alignment="CENTER" layoutX="517.0" layoutY="22.0" mnemonicParsing="false" onAction="#playNextSong" prefHeight="34.0" prefWidth="43.0" />
+      <Button fx:id="prevbtn" alignment="CENTER" layoutX="419.0" layoutY="22.0" mnemonicParsing="false" onAction="#playPrevSong" prefHeight="34.0" prefWidth="43.0" />
       <VBox layoutX="14.0" layoutY="68.0" prefHeight="394.0" prefWidth="127.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="Songs">

@@ -24,7 +24,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 public class MainController implements Initializable {
     @FXML
@@ -52,6 +51,7 @@ public class MainController implements Initializable {
     private Button nextbtn;
     @FXML
     private Button prevbtn;
+    private int currentSongIndex;
     private MusicPlayer player = new MusicPlayer();
     private final ObservableList<Song> data = FXCollections.observableArrayList();
 
@@ -66,7 +66,7 @@ public class MainController implements Initializable {
         progressslider.disableProperty().set(true);
     }
 
-    private void setDataListener() {
+    private void setDataListener() { // if the data table is empty the progressslider will be disabled
         data.addListener(new ListChangeListener<Song>() {
             @Override
             public void onChanged(Change<? extends Song> c) {
@@ -109,10 +109,7 @@ public class MainController implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount()==2 && !row.isEmpty()){
                     Song rowSong = row.getItem();
-                    player.playNewSong(rowSong.getFile(),playbtn);
-                    player.beginTimer(progressslider);
-                    progressslider.disableProperty().set(false);
-                    progressslider.setMax(player.getSound().getDuration().toSeconds());
+                    beginSongHandler(rowSong);
                 }
             });
             return row;
@@ -152,5 +149,39 @@ public class MainController implements Initializable {
             MediaPlayer mediaPlayer = player.getPlayer();
             mediaPlayer.seek(Duration.seconds(progressslider.getValue()));
         });
+        progressslider.setOnMouseDragOver(event -> {
+            MediaPlayer mediaPlayer = player.getPlayer();
+            mediaPlayer.seek(Duration.seconds(progressslider.getValue()));
+        });
+    }
+
+    public void playPrevSong(ActionEvent actionEvent) {
+        if (currentSongIndex != 0){
+            Song prevSong = data.get(currentSongIndex-1);
+            beginSongHandler(prevSong);
+        }
+    }
+
+    public void playNextSong(ActionEvent actionEvent) {
+        if (currentSongIndex != data.size()-1){
+            Song nextSong = data.get(currentSongIndex+1);
+            beginSongHandler(nextSong);
+        }else {
+            Song nextSong = data.get(0);
+            beginSongHandler(nextSong);
+        }
+    }
+
+    public void beginSongHandler(Song rowSong){
+        for (int i=0;i<data.size();i++) {
+            if (data.get(i) == rowSong){
+                currentSongIndex = i;
+                break;
+            }
+        }
+        player.playNewSong(rowSong.getFile(),playbtn);
+        player.beginTimer(progressslider);
+        progressslider.disableProperty().set(false);
+        playinglbl.setText(rowSong.getTitle());
     }
 }
